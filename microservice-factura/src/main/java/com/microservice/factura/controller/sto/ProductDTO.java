@@ -1,19 +1,17 @@
-package com.microservice.category.http.response;
+package com.microservice.factura.controller.sto;
 
-import com.microservice.category.controller.sto.ProductDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductByCategoryResponse {
+public class ProductDTO {
     private String name;
     private String descripcion;
-    private List<ProductDTO> productDTOList;
+    private Double precio;
+    private Long categoryId;
 }

@@ -33,8 +33,25 @@ public class ProductController {
         return ResponseEntity.ok(productService.findById(id));
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        if (productService.existsById(id)) {
+            product.setId(id);
+            productService.save(product);
+            return ResponseEntity.ok("producto actualizado");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categoria no encontrada");
+        }
+    }
+
     @GetMapping("/search-by-category/{categoryId}")
     public ResponseEntity<?> findByIdCategory(@PathVariable Long categoryId){
         return ResponseEntity.ok(productService.findByCategoryId(categoryId));
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        productService.deleteById(id);
+        return ResponseEntity.ok("Producto eliminado correctamente");
     }
 }

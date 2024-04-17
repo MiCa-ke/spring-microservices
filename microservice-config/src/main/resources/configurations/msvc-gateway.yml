@@ -6,9 +6,14 @@ spring:
     name: msvc-gateway
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+          corsConfigurations:
+            '[/**]':
+              allowedOrigins: "*"
+              allowedMethods: "*"
+              allowedHeaders: "*"
       routes:
         - id: product
           uri: 'http://localhost:8090'
@@ -18,6 +23,20 @@ spring:
           uri: 'http://localhost:9090'
           predicates:
             - Path=/api/category/**
-eureka:
-  client:
-    register-with-eureka: false
+      globalcors:  # Add this section for CORS configuration
+        corsConfiguration:
+          allowedOrigins:  # Replace with your allowed origins (e.g., http://localhost:4200)
+            - "*"  # For development only, replace with specific origins in production
+          allowedMethods:
+            - GET
+            - POST
+            - PUT
+            - DELETE
+          allowedHeaders:
+            - Content-Type
+            - Authorization
+          allowCredentials: true
+          maxAge: 3600
+  eureka:
+    client:
+      register-with-eureka: false

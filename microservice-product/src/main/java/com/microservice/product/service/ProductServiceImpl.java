@@ -29,7 +29,17 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
+    public boolean existsById(Long id) {
+        return productRepository.existsById(id);
+    }
+
+    @Override
     public List<Product> findByCategoryId(Long categoryId) {
         return productRepository.findAllByCategoryId(categoryId);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 }

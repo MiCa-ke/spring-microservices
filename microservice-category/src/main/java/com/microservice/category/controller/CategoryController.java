@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
-@CrossOrigin
 @RestController
 @RequestMapping("/api/category")
 public class CategoryController {
@@ -32,6 +31,7 @@ public class CategoryController {
     public ResponseEntity<?> findById(@PathVariable Long id){
         return ResponseEntity.ok(categoryService.findById(id));
     }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<String> updateCategory(@PathVariable Long id, @RequestBody Category category) {
         if (categoryService.existsById(id)) {

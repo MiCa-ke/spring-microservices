@@ -47,12 +47,12 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
-    public ProductByCategoryResponse findProductByCategoryId(Long courseId) {
+    public ProductByCategoryResponse findProductByCategoryId(Long categoryId) {
 
-        // Consultar si existe el curso
-        Category category = categoryRepository.findById(courseId).orElseThrow();
+        // Consultar si existe la categoria
+        Category category = categoryRepository.findById(categoryId).orElseThrow();
 
-        // Obtener los estudiantes
+        // Obtener los productos
         List<ProductDTO> productDTOList = productClient.findAllProductByCategory(category.getId());
 
         return ProductByCategoryResponse.builder()
